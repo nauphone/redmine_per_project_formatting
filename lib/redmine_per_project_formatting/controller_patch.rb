@@ -20,7 +20,7 @@ module RedminePerProjectFormatting
     end
 
     def set_current_text_formatting
-      format = Setting.current_text_formatting = @project.try(:text_formatting)
+      format = Setting.current_text_formatting = @issue.try(:text_formatting) || @project.try(:text_formatting)
       return if format.blank? || @project.project_wide_formatting
 
       modules = @project.modules_for_formatting.to_a.map(&:to_sym)
